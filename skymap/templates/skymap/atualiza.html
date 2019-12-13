@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Página de Atualização de Poster</h1>
+
+    <ul>
+        <li><a href="{% url 'skymap:index' %}">Página Inicial</a></li>
+        <li><a href="{% url 'skymap:cadastra_poster' %}">Cadastrar Poster</a></li>
+        <li><a href="{% url 'skymap:lista_posters' %}">Lista de Posters</a></li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form }}
+
+        <button>Enviar</button>
+    </form>
+</body>
+</html>

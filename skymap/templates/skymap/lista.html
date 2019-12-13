@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Lista de Posters</h1>
+
+    <ul>
+        <li><a href="{% url 'skymap:index' %}">Página Inicial</a></li>
+        <li><a href="{% url 'skymap:cadastra_poster' %}">Cadastrar Poster</a></li>
+        <li><a href="{% url 'skymap:lista_posters' %}">Lista de Posters</a></li>
+    </ul>
+
+    <div style="max-width: 50%;">
+        <table style="border: 1px solid #BBB; width: 100%;">
+            <thead>
+                <tr style="border-bottom: 1px solid #AAA">
+                    <td><b>Language</b></td>
+                    <td><b>Text</b></td>
+                    <td><b>Reason</b></td>
+                    <td><b>City</b></td>
+                    <td><b>Date</b></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for poster in posters %}
+                    <tr>
+                        <td>{{ poster.lang }}</td>
+                        <td>{{ poster.text }}</td>
+                        <td>{{ poster.reason }}</td>
+                        <td>{{ poster.city }}</td>
+                        <td>{{ poster.date }}</td>
+                        <td><a href="{% url 'skymap:atualiza_poster' pk=poster.id %}">Atualizar</a></td>
+                        <td><a href="{% url 'skymap:deleta_poster' pk=poster.id %}">Excluir</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
