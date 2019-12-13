@@ -3,7 +3,6 @@ asgiref==3.2.3
 astroid==2.3.3
 astropy==3.2.3
 autopep8==1.4.4
-btrfsutil==1.1.1
 CacheControl==0.12.5
 cairocffi==1.1.0
 cffi==1.13.2
