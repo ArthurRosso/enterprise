@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -71,14 +72,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'enterprise.wsgi.application'
 
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'd7m53nf4255jem'),
+        'USER': os.environ.get('DB_USER', 'qsxbgywcowjgtx'),
+        'PASSWORD': os.environ.get('DB_PASS', '3e04d9a92f6d7297d4918740753a204b18e60fbadd4f37c23d19de7209a65cee'),
+        'HOST': 'ec2-107-21-235-87.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
