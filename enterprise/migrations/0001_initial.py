@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
             name='Poster',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('lang', models.CharField(max_length=255)),
                 ('text', models.CharField(max_length=255)),
                 ('reason', models.CharField(max_length=255)),
                 ('city', models.CharField(max_length=255)),
