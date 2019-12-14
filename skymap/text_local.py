@@ -2,7 +2,7 @@
 A list of text strings, which we can render in various languages
 """
 
-text = {
+text_local = {
     "en":
         {
             "title": "PLANISPHERE",

@@ -6,7 +6,7 @@ import os
 import subprocess
 import time
 
-import text
+import text_local
 from settings_local import fetch_command_line_arguments
 from starwheel import StarWheel
 
@@ -60,14 +60,14 @@ class PosterCreateView(CreateView):
         "lang_short": "" if language == "en" else "_{}".format(language)
     }
 
-    settings = {
+    settings_local = {
         'language': language,
         'latitude': latitude,
         'theme': theme
     }
 
     # Render the Star Wheel
-    StarWheel(settings=settings).render_all_formats(
+    StarWheel(settings_local=settings_local).render_all_formats(
         filename="{dir_parts}/starwheel_{abs_lat:02d}{ns}_{lang}".format(
             **subs)
     )
