@@ -1,4 +1,4 @@
-from skymap.views import IndexTemplateView, PosterListView, PosterUpdateView, PosterCreateView, \
+from skymap.views import IndexTemplateView, PosterListView, PosterUpdateView, PosterCreateView, PosterUpdateStarwheelView, \
     PosterDeleteView
 
 from django.urls import path
@@ -20,4 +20,7 @@ urlpatterns = [
 
     # GET/POST /posters/excluir/{pk}
     path('poster/excluir/<pk>', PosterDeleteView.as_view(), name="deleta_poster"),
+    
+    # GET /poster/{pk}/starwheel
+    path('poster/{pk}/starwheel', PosterUpdateStarwheelView.as_view(), name="starwheel"),
 ]

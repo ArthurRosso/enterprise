@@ -37,5 +37,10 @@ class Poster(models.Model):
         null=False,
         blank=False
     )
+    
+    # Starwheel
+    st = models.BinaryField(
+        blank=True
+    )
 
     objetos = models.Manager()
