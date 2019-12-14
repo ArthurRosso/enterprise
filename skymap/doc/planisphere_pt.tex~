@@ -1,0 +1,58 @@
+% planisphere.tex
+%
+% The LaTeX code in this file brings together into a single document the
+% various components of the model planisphere.
+%
+% Copyright (C) 2014-2019 Dominic Ford <dcf21-www@dcford.org.uk>
+%
+% This code is free software; you can redistribute it and/or modify it under
+% the terms of the GNU General Public License as published by the Free Software
+% Foundation; either version 2 of the License, or (at your option) any later
+% version.
+%
+% You should have received a copy of the GNU General Public License along with
+% this file; if not, write to the Free Software Foundation, Inc., 51 Franklin
+% Street, Fifth Floor, Boston, MA  02110-1301, USA
+
+% ----------------------------------------------------------------------------
+
+
+\documentclass[a4paper, portrait]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{fancyhdr,url}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftitle={Crie seu próprio planisfério}, pdfauthor={Arthur Rosso}, pdfsubject={Crie seu próprio planisfério}, pdfkeywords={Crie seu próprio planisfério}, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage[pass]{geometry}
+\usepackage{array}
+\pagecolor{black}
+\color{white}
+
+\title{Faça seu próprio planisfério}
+\author{Arthur Rosso}
+\date{2019}
+
+\begin{document}
+\thispagestyle{empty}
+\newgeometry{margin=15pt}
+
+\setlength{\arrayrulewidth}{1mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{2.5}
+ 
+{
+\begin{tabular}{ |p{2cm}|p{2cm}|p{2cm}|  }
+\hline
+\multicolumn{3}{|c|}{
+    \centerline{\includegraphics{tmp/starwheel}}
+} \\
+\multicolumn{3}{|c|}{
+    \centerline{I love you to the moon and back.} 
+} \\
+\hline
+\end{tabular}
+}
+
+\end{document}
+
