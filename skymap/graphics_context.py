@@ -6,7 +6,7 @@ from math import pi, sin, cos
 
 import cairocffi as cairo
 
-from constants import unit_deg, unit_mm, font_size_base, line_width_base, dots_per_inch
+from constants_local import unit_deg, unit_mm, font_size_base, line_width_base, dots_per_inch
 
 
 class GraphicsPage:
@@ -456,17 +456,17 @@ class BaseComponent:
     A class wrapping a piece of code used to draw a single component of the model.
     """
 
-    def __init__(self, settings=None):
+    def __init__(self, settings_local=None):
         """
         A class wrapping a piece of code used to draw a single component of the model.
 
-        :param settings:
-            Settings used in the rendering of this component
+        :param settings_local:
+            settings used in the rendering of this component
         """
 
-        if settings is None:
-            settings = {}
-        self.settings = settings
+        if settings_local is None:
+            settings_local = {}
+        self.settings_local = settings_local
 
     def render_to_page(self, page, offset_x=0, offset_y=0, rotation=0):
         """
@@ -488,7 +488,7 @@ class BaseComponent:
         # Create a drawing context for drawing onto this page
         with GraphicsContext(page=page, offset_x=offset_x, offset_y=offset_y, rotation=rotation) as context:
             # Render this item
-            self.do_rendering(settings=self.settings, context=context)
+            self.do_rendering(settings_local=self.settings_local, context=context)
 
     def render_to_file(self, filename=None, img_format="png", dots_per_inch=dots_per_inch):
         """
@@ -507,7 +507,7 @@ class BaseComponent:
         """
 
         # Look up the bounding box of the item we're about to draw
-        bounding_box = self.bounding_box(settings=self.settings)
+        bounding_box = self.bounding_box(settings_local=self.settings_local)
 
         # If no filename is specified, then individual derived classes should specify a default
         if filename is None:
@@ -545,12 +545,12 @@ class BaseComponent:
                                 img_format=img_format,
                                 dots_per_inch=dots_per_inch)
 
-    def bounding_box(self, settings):
+    def bounding_box(self, settings_local):
         """
         This method is required to report the bounding box of the canvas area used by this item.
 
-        :param settings:
-            A dictionary of settings required by the renderer.
+        :param settings_local:
+            A dictionary of settings_local required by the renderer.
         :return:
             Dictionary with the elements 'x_min', 'x_max', 'y_min and 'y_max' set to the canvas area required.
         """
@@ -568,12 +568,12 @@ class BaseComponent:
                                   "<default_filename> which report a default filename to use for this item, without "
                                   "file type suffix.")
 
-    def do_rendering(self, settings, context):
+    def do_rendering(self, settings_local, context):
         """
         This method is required to actually render this item.
 
-        :param settings:
-            A dictionary of settings required by the renderer.
+        :param settings_local:
+            A dictionary of settings_local required by the renderer.
         :param context:
             A GraphicsContext object to use for drawing
         :return:
@@ -588,22 +588,22 @@ class CompositeComponent(BaseComponent):
     A class allowing multiple components to be overlaid on a single canvas
     """
 
-    def __init__(self, components, settings=None):
+    def __init__(self, components, settings_local=None):
         self.components = components
-        super(CompositeComponent, self).__init__(settings=settings)
+        super(CompositeComponent, self).__init__(settings_local=settings_local)
 
     def default_filename(self):
         return "composite_page"
 
-    def bounding_box(self, settings):
+    def bounding_box(self, settings_local):
         """
         Work out overall bounding box of all items when constituent components are overlaid.
 
-        :param settings:
-            A dictionary of settings required by the renderer.
+        :param settings_local:
+            A dictionary of settings_local required by the renderer.
         """
 
-        bounding_boxes = [item.bounding_box(settings=item.settings) for item in self.components]
+        bounding_boxes = [item.bounding_box(settings_local=item.settings_local) for item in self.components]
 
         return {
             'x_min': min([item['x_min'] for item in bounding_boxes]),
@@ -612,12 +612,12 @@ class CompositeComponent(BaseComponent):
             'y_max': max([item['y_max'] for item in bounding_boxes]),
         }
 
-    def do_rendering(self, settings, context):
+    def do_rendering(self, settings_local, context):
         """
         Render each of the sub-components we are overlaying in turn.
 
-        :param settings:
-            A dictionary of settings required by the renderer.
+        :param settings_local:
+            A dictionary of settings_local required by the renderer.
         :param context:
             A GraphicsContext object to use for drawing
         :return:
@@ -625,4 +625,4 @@ class CompositeComponent(BaseComponent):
         """
 
         for item in self.components:
-            item.do_rendering(settings=settings, context=context)
+            item.do_rendering(settings_local=settings_local, context=context)

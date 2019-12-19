@@ -9,10 +9,10 @@ from numpy import arange
 
 import calendar
 from bright_stars_process import fetch_bright_star_list
-from constants import unit_deg, unit_rev, unit_mm, unit_cm, r_1, r_gap, central_hole_size, radius
+from constants_local import unit_deg, unit_rev, unit_mm, unit_cm, r_1, r_gap, central_hole_size, radius
 from graphics_context import BaseComponent
-from settings import fetch_command_line_arguments
-from text import text
+from settings_local import fetch_command_line_arguments
+from text_local import text_local
 from themes import themes
 
 
@@ -27,11 +27,11 @@ class StarWheel(BaseComponent):
         """
         return "star_wheel"
 
-    def bounding_box(self, settings):
+    def bounding_box(self, settings_local):
         """
         Return the bounding box of the canvas area used by this component.
 
-        :param settings:
+        :param settings_local:
             A dictionary of settings required by the renderer.
         :return:
          Dictionary with the elements 'x_min', 'x_max', 'y_min' and 'y_max' set
@@ -43,11 +43,11 @@ class StarWheel(BaseComponent):
             'y_max': r_1 + 4 * unit_mm
         }
 
-    def do_rendering(self, settings, context):
+    def do_rendering(self, settings_local, context):
         """
         This method is required to actually render this item.
 
-        :param settings:
+        :param settings_local:
             A dictionary of settings required by the renderer.
         :param context:
             A GraphicsContext object to use for drawing
@@ -55,10 +55,10 @@ class StarWheel(BaseComponent):
             None
         """
 
-        is_southern = settings['latitude'] < 0
-        language = settings['language']
-        latitude = abs(settings['latitude'])
-        theme = themes[settings['theme']]
+        is_southern = settings_local['latitude'] < 0
+        language = settings_local['language']
+        latitude = abs(settings_local['latitude'])
+        theme = themes[settings_local['theme']]
 
         context.set_font_size(1.2)
 
@@ -183,8 +183,8 @@ class StarWheel(BaseComponent):
             [name, ra, dec] = line.split()[:3]
 
             # Translate constellation name into the requested language, if required
-            if name in text[language]['constellation_translations']:
-                name = text[language]['constellation_translations'][name]
+            if name in text_local[language]['constellation_translations']:
+                name = text_local[language]['constellation_translations'][name]
 
             ra = float(ra) * 360. / 24
             dec = float(dec)
@@ -221,7 +221,7 @@ class StarWheel(BaseComponent):
         # Write month names around the date scale
         context.set_font_size(2.3)
         context.set_color(theme['date'])
-        for mn, (mlen, name) in enumerate(text[language]['months']):
+        for mn, (mlen, name) in enumerate(text_local[language]['months']):
             theta = s * theta2014(calendar.julian_day(year=2014, month=mn + 1, day=mlen // 2, hour=12, minute=0, sec=0))
 
             # We supply circular_text with a negative radius here, as a fudge to orientate the text with bottom-inwards
@@ -230,7 +230,7 @@ class StarWheel(BaseComponent):
                                   spacing=1, size=1)
 
         # Draw ticks for the days of the month
-        for mn, (mlen, name) in enumerate(text[language]['months']):
+        for mn, (mlen, name) in enumerate(text_local[language]['months']):
             # Tick marks for each day
             for d in range(1, mlen + 1):
                 theta = s * theta2014(calendar.julian_day(year=2014, month=mn + 1, day=d, hour=0, minute=0, sec=0))
@@ -279,7 +279,7 @@ if __name__ == "__main__":
     arguments = fetch_command_line_arguments(default_filename=StarWheel().default_filename())
 
     # Render the star wheel for the skymap
-    StarWheel(settings={
+    StarWheel(settings_local={
         'latitude': arguments['latitude'],
         'language': 'en',
         'theme': arguments['theme'],
