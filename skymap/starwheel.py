@@ -7,13 +7,13 @@ from math import pi, sin, cos, atan2, hypot
 
 from numpy import arange
 
-import calendar
-from bright_stars_process import fetch_bright_star_list
-from constants_local import unit_deg, unit_rev, unit_mm, unit_cm, r_1, r_gap, central_hole_size, radius
-from graphics_context import BaseComponent
-from settings_local import fetch_command_line_arguments
-from text_local import text_local
-from themes import themes
+from skymap import calendar
+from skymap.bright_stars_process import fetch_bright_star_list
+from skymap.constants_local import unit_deg, unit_rev, unit_mm, unit_cm, r_1, r_gap, central_hole_size, radius
+from skymap.graphics_context import BaseComponent
+from skymap.settings_local import fetch_command_line_arguments
+from skymap.text_local import text_local
+from skymap.themes import themes
 
 
 class StarWheel(BaseComponent):

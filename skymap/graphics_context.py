@@ -6,7 +6,7 @@ from math import pi, sin, cos
 
 import cairocffi as cairo
 
-from constants_local import unit_deg, unit_mm, font_size_base, line_width_base, dots_per_inch
+from skymap.constants_local import unit_deg, unit_mm, font_size_base, line_width_base, dots_per_inch
 
 
 class GraphicsPage:

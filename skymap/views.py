@@ -6,9 +6,9 @@ import os
 import subprocess
 import time
 
-import text_local
-from settings_local import fetch_command_line_arguments
-from starwheel import StarWheel
+from skymap import text_local
+from skymap.settings_local import fetch_command_line_arguments
+from skymap.starwheel import StarWheel
 
 
 # PÁGINA PRINCIPAL
